@@ -47,6 +47,7 @@ GEM
     rack-accept (0.4.5)
       rack (>= 0.4)
     ruby2_keywords (0.0.4)
+    sequel (5.42.0)
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
     zeitwerk (2.4.2)
@@ -58,6 +59,7 @@ DEPENDENCIES
   csv
   grape
   pg
+  sequel
 
 BUNDLED WITH
    2.2.15

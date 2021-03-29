@@ -1,5 +1,5 @@
 task :default => 'setup_db'
 
 task :setup_db do
-    ruby "db/migrate/setup_db.rb"
+    ruby "tasks/setup_db.rb"
 end
