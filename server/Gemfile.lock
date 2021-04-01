@@ -50,6 +50,7 @@ GEM
     sequel (5.42.0)
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
+    webrick (1.7.0)
     zeitwerk (2.4.2)
 
 PLATFORMS
@@ -60,6 +61,7 @@ DEPENDENCIES
   grape
   pg
   sequel
+  webrick (~> 1.7)
 
 BUNDLED WITH
    2.2.15

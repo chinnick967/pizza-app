@@ -10,3 +10,4 @@ gem 'grape'
 gem 'pg'
 gem 'csv'
 gem 'sequel'
+gem "webrick", "~> 1.7"
