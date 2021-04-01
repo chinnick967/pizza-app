@@ -73,33 +73,73 @@ module API
                                         GROUP BY month)
                         ORDER BY month").all
             end
+            def deleteFromDB(table, id)
+                db = Sequel.postgres('pizzadb', :host => 'localhost', :port => 5432, :max_connections => 10)
+                db[table].where(id: id).delete
+            end
+            def addToOrders(person_id, type, eaten_at)
+                db = Sequel.postgres('pizzadb', :host => 'localhost', :port => 5432, :max_connections => 10)
+                db[:orders].insert(:person_id => person_id, :type => type, :eaten_at => eaten_at)
+            end
+            def updateOrder(id, column, value)
+                db = Sequel.postgres('pizzadb', :host => 'localhost', :port => 5432, :max_connections => 10)
+                db[:orders].where(id: id).update(column => value)
+            end
         end
 
         resource :people do
+            desc "Fetch all people"
             get :all do
                 fetch_all_people
+            end
+
+            desc "Delete a row from the table using the ID"
+            params do
+                requires :id, :table
+            end
+            delete ':id' do
+                deleteFromDB(params[:table], params[:id])
             end
         end
 
         resource :orders do
+            desc "Fetch all orders"
             get :all do
                 fetch_all_orders
             end
 
+            desc "Fetch all streaks of orders where more pizza was ordered the next day"
             get :streaks do
                 order_streaks
             end
 
+            desc "Fetch the best day for orders for each month"
             get :bestmonth do
                 fetch_most_daily_orders_in_each_month
             end
             
-            desc "Delete a row from the table"
+            desc "Delete a row from the table using the ID"
             params do
-                requires :id
+                requires :id, :table
             end
             delete ':id' do
-                { test: 'test delete' }
+                deleteFromDB(params[:table], params[:id])
+            end
+            
+            desc "Add an order"
+            params do
+                requires :person_id, :type, :eaten_at
+            end
+            post :addOrder do
+                addToOrders(params[:person_id], params[:type], params[:eaten_at])
+            end
+
+            desc "Update an order"
+            params do
+                requires :id, :column, :value
+            end
+            put :updateOrder do
+                updateOrder(params[:id], params[:column], params[:value])
             end
         end
 
