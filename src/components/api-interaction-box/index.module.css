@@ -1,0 +1,43 @@
+.apiInteractionBox {
+    background: white;
+    height: 200px;
+    width: 800px;
+    margin: 50px auto;
+    position: relative;
+}
+
+.panel {
+    box-sizing: border-box;
+    height: 100%;
+    padding: 10px;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.leftPanel {
+    width: 40%;
+    border-right: solid 1px black;
+}
+
+.rightPanel {
+    width: 60%;
+    overflow-y: scroll;
+}
+
+h2 {
+    font-size: 16px;
+    margin-top: 0;
+    margin-bottom: 10px;
+    position: relative;
+}
+
+table {
+    table-layout: fixed;
+    position: relative;
+    width: 100%;
+}
+
+td {
+    font-size: 12px;
+    padding: 5px 0;
+}
